@@ -1,4 +1,5 @@
 import "./App.css";
+import profilePhoto from "./assets/profile.jpg";
 
 const featuredProjects = [
   {
@@ -90,8 +91,6 @@ function App() {
   return (
     <div className="portfolio">
 
-      {/* NAVIGATION */}
-
       <header className="navbar">
         <a href="#home" className="name-mark">
           <span>RMO</span>
@@ -107,9 +106,9 @@ function App() {
       </header>
 
 
-      {/* HERO */}
-
       <main>
+
+        {/* HERO */}
 
         <section id="home" className="hero">
 
@@ -169,8 +168,11 @@ function App() {
               <span>2026</span>
             </div>
 
-            <div className="profile-initials">
-              RMO
+            <div className="profile-photo-small">
+              <img
+                src={profilePhoto}
+                alt="Raji Mubarak Olohunisola"
+              />
             </div>
 
             <h2>
@@ -196,9 +198,16 @@ function App() {
         </section>
 
 
-        {/* INTRODUCTION */}
+        {/* APPROACH */}
 
         <section className="introduction">
+
+          <div className="introduction-photo">
+            <img
+              src={profilePhoto}
+              alt="Raji Mubarak Olohunisola"
+            />
+          </div>
 
           <div className="section-label">
             01 / APPROACH
@@ -222,7 +231,7 @@ function App() {
         </section>
 
 
-        {/* FEATURED WORK */}
+        {/* WORK */}
 
         <section id="work" className="work">
 
@@ -313,7 +322,7 @@ function App() {
         </section>
 
 
-        {/* ACADEMIC WORK */}
+        {/* UNIVERSITY WORK */}
 
         <section className="academic">
 
@@ -536,8 +545,6 @@ function App() {
 
       </main>
 
-
-      {/* FOOTER */}
 
       <footer>
 
