@@ -1,9 +1,180 @@
-html,
-body,
-#root {
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+/* =========================================================
+   DOCUMENT FOUNDATION
+========================================================= */
+
+:root {
+  color-scheme: dark light;
+  font-family: "Manrope", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  min-width: 320px;
   min-height: 100%;
+  background: #050914;
+  scroll-behavior: smooth;
 }
 
 body {
+  min-width: 320px;
+  min-height: 100vh;
   margin: 0;
+  background: #050914;
+}
+
+#root {
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   BOX MODEL
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   MEDIA
+========================================================= */
+
+img,
+picture,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+/* =========================================================
+   LINKS & BUTTONS
+========================================================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border: 0;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+::selection {
+  background: rgba(37, 99, 235, 0.45);
+  color: #ffffff;
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 4px;
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #334155 #050914;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050914;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 999px;
+  border: 2px solid #050914;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* =========================================================
+   LIGHT THEME — DOCUMENT LEVEL
+========================================================= */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  scrollbar-color: #94a3b8 #f5f7fb;
+}
+
+:root[data-theme="light"] body,
+:root[data-theme="light"] html {
+  background: #f5f7fb;
+}
+
+:root[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #f5f7fb;
+}
+
+:root[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-color: #f5f7fb;
+}
+
+:root[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
