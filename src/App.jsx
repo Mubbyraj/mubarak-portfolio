@@ -461,13 +461,17 @@ function App() {
   ];
 
   useEffect(() => {
+    if (bookOpen) return undefined;
     const openOnScroll = (event) => {
-      if (!bookOpen && (Math.abs(event.deltaY) > 4 || Math.abs(event.deltaX) > 4)) {
-        setBookOpen(true);
-      }
+      if (event.cancelable) event.preventDefault();
+      setBookOpen(true);
     };
-    window.addEventListener("wheel", openOnScroll, { passive: true, once: true });
-    return () => window.removeEventListener("wheel", openOnScroll);
+    window.addEventListener("wheel", openOnScroll, { passive: false, once: true });
+    window.addEventListener("touchmove", openOnScroll, { passive: false, once: true });
+    return () => {
+      window.removeEventListener("wheel", openOnScroll);
+      window.removeEventListener("touchmove", openOnScroll);
+    };
   }, [bookOpen]);
 
   useEffect(() => {
