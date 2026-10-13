@@ -69,8 +69,7 @@ const projects = [
     stack: ["Next.js", "Supabase", "Prisma", "SEO"],
     link: "https://dr-sahid-abdullah-busari.vercel.app/",
     accent: "orange",
-  },,
-
+  },
   {
     number: "06",
     type: "SYSTEM ADMINISTRATION / SECURITY",
