@@ -1881,7 +1881,7 @@ button {
     transform-origin: center top;
     animation: stack-panel-exit linear both;
     animation-timeline: view();
-    animation-range: exit 0% exit 100%;
+    animation-range: entry 0% exit 100%;
   }
 
   main > .hero { z-index: 1; }
