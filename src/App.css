@@ -1863,6 +1863,85 @@ button {
 }
 
 /* =========================================================
+   STACKED SCROLL PANELS
+   Each major section gently scales back as it leaves the viewport.
+   The next section sits above it, creating a layered page transition.
+========================================================= */
+
+@supports (animation-timeline: view()) {
+  main > .hero,
+  main > .intro-strip,
+  main > .section,
+  main > .contact-section {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--bg);
+    border-radius: clamp(18px, 2vw, 28px);
+    box-shadow: 0 24px 70px var(--shadow);
+    transform-origin: center top;
+    animation: stack-panel-exit linear both;
+    animation-timeline: view();
+    animation-range: exit 0% exit 100%;
+  }
+
+  main > .hero { z-index: 1; }
+  main > .intro-strip { z-index: 2; }
+  main > .work-section { z-index: 3; }
+  main > .academic-section { z-index: 4; }
+  main > .about-section { z-index: 5; }
+  main > .skills-section { z-index: 6; }
+  main > .focus-section { z-index: 7; }
+  main > .languages-section { z-index: 8; }
+  main > .certifications-section { z-index: 9; }
+  main > .contact-section { z-index: 10; }
+
+  @keyframes stack-panel-exit {
+    from {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    to {
+      transform: scale(0.94);
+      opacity: 0.72;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  @supports (animation-timeline: view()) {
+    main > .hero,
+    main > .intro-strip,
+    main > .section,
+    main > .contact-section {
+      border-radius: 18px;
+      animation-name: stack-panel-exit-mobile;
+    }
+
+    @keyframes stack-panel-exit-mobile {
+      from {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      to {
+        transform: scale(0.98);
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main > .hero,
+  main > .intro-strip,
+  main > .section,
+  main > .contact-section {
+    animation: none !important;
+  }
+}
+
+/* =========================================================
    REDUCED MOTION
 ========================================================= */
 
