@@ -445,6 +445,48 @@ function App() {
   });
 
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [bookOpen, setBookOpen] = useState(false);
+  const [activePage, setActivePage] = useState(0);
+  const bookPages = [
+    { selector: "#top", label: "Cover" },
+    { selector: "#work", label: "Selected work" },
+    { selector: ".academic-section", label: "Academic projects" },
+    { selector: "#about", label: "About me" },
+    { selector: "#skills", label: "Skills" },
+    { selector: ".focus-section", label: "Focus" },
+    { selector: ".languages-section", label: "Languages" },
+    { selector: "#certifications", label: "Learning" },
+    { selector: "#contact", label: "Contact" },
+  ];
+
+  useEffect(() => {
+    const openOnScroll = (event) => {
+      if (!bookOpen && (Math.abs(event.deltaY) > 4 || Math.abs(event.deltaX) > 4)) {
+        setBookOpen(true);
+      }
+    };
+    window.addEventListener("wheel", openOnScroll, { passive: true, once: true });
+    return () => window.removeEventListener("wheel", openOnScroll);
+  }, [bookOpen]);
+
+  useEffect(() => {
+    const chapters = Array.from(document.querySelectorAll("main .book-chapter"));
+    if (!chapters.length) return undefined;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) {
+          const index = chapters.indexOf(visible.target);
+          if (index >= 0) setActivePage(Math.min(index, bookPages.length - 1));
+        }
+      },
+      { rootMargin: "-28% 0px -48% 0px", threshold: [0, 0.1, 0.25, 0.5] }
+    );
+    chapters.forEach((chapter) => observer.observe(chapter));
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -567,6 +609,27 @@ function App() {
         />
       </div>
 
+      <div className={`book-cover-shell ${bookOpen ? "book-is-open" : ""}`} aria-hidden={bookOpen}>
+        <div className="book-cover-back" />
+        <div className="book-cover-pages" />
+        <div className="book-cover-front">
+          <div className="book-cover-inner">
+            <span className="book-edition">PERSONAL PORTFOLIO · 2026</span>
+            <div className="book-cover-rule" />
+            <p className="book-cover-kicker">INFORMATION SYSTEMS · WEB · SECURITY</p>
+            <h1>RAJI<br />MUBARAK<br /><span>OLOHUNISOLA</span></h1>
+            <p className="book-cover-description">A collection of systems, ideas, and things built with purpose.</p>
+            <button className="book-open-button" type="button" onClick={() => setBookOpen(true)}>
+              Open the book <span aria-hidden="true">↗</span>
+            </button>
+            <span className="book-cover-foot">SCROLL OR TAP TO BEGIN</span>
+          </div>
+        </div>
+        {!bookOpen && (
+          <button className="book-cover-hit-area" type="button" onClick={() => setBookOpen(true)} aria-label="Open Mubarak's portfolio book" />
+        )}
+      </div>
+
       <nav className="navbar">
         <motion.a
           href="#top"
@@ -627,7 +690,7 @@ function App() {
 
       <main id="top">
         <section
-          className="hero"
+          className="hero book-chapter"
           ref={heroRef}
         >
           <div className="hero-copy">
@@ -884,7 +947,7 @@ function App() {
         </section>
 
         <motion.section
-          className="intro-strip"
+          className="intro-strip book-chapter"
           initial="hidden"
           whileInView="visible"
           viewport={{
@@ -913,7 +976,7 @@ function App() {
         </motion.section>
 
         <section
-          className="section work-section"
+          className="section work-section book-chapter"
           id="work"
         >
           <SectionReveal>
@@ -955,7 +1018,7 @@ function App() {
           </motion.div>
         </section>
 
-        <section className="section academic-section">
+        <section className="section academic-section book-chapter">
           <SectionReveal>
             <div className="section-heading compact">
               <div>
@@ -1016,7 +1079,7 @@ function App() {
         </section>
 
         <section
-          className="section about-section"
+          className="section about-section book-chapter"
           id="about"
         >
           <div className="about-grid">
@@ -1066,7 +1129,7 @@ function App() {
         </section>
 
         <section
-          className="section skills-section"
+          className="section skills-section book-chapter"
           id="skills"
         >
           <SectionReveal>
@@ -1137,7 +1200,7 @@ function App() {
           </motion.div>
         </section>
 
-        <section className="section focus-section">
+        <section className="section focus-section book-chapter">
           <div className="focus-grid">
             <SectionReveal>
               <div>
@@ -1173,7 +1236,7 @@ function App() {
           </div>
         </section>
 
-        <section className="section languages-section">
+        <section className="section languages-section book-chapter">
           <SectionReveal>
             <div className="language-header">
               <span className="section-index">
@@ -1215,7 +1278,7 @@ function App() {
         </section>
 
         <section
-          className="section certifications-section"
+          className="section certifications-section book-chapter"
           id="certifications"
         >
           <SectionReveal>
@@ -1259,7 +1322,7 @@ function App() {
         </section>
 
         <section
-          className="contact-section"
+          className="contact-section book-chapter"
           id="contact"
         >
           <motion.div
@@ -1329,6 +1392,20 @@ function App() {
           </motion.div>
         </section>
       </main>
+
+      <div className={`book-navigation ${bookOpen ? "book-navigation-visible" : ""}`} aria-label="Portfolio page navigation">
+        <button type="button" onClick={() => {
+          setBookOpen(true);
+          const target = document.querySelector(bookPages[Math.max(0, activePage - 1)]?.selector);
+          target?.scrollIntoView({ behavior: shouldReduceMotion ? "auto" : "smooth", block: "start" });
+        }} disabled={activePage <= 0} aria-label="Previous page">←</button>
+        <span><strong>{String(Math.min(activePage + 1, bookPages.length)).padStart(2, "0")}</strong> / {String(bookPages.length).padStart(2, "0")} <em>{bookPages[Math.min(activePage, bookPages.length - 1)]?.label}</em></span>
+        <button type="button" onClick={() => {
+          setBookOpen(true);
+          const target = document.querySelector(bookPages[Math.min(bookPages.length - 1, activePage + 1)]?.selector);
+          target?.scrollIntoView({ behavior: shouldReduceMotion ? "auto" : "smooth", block: "start" });
+        }} disabled={activePage >= bookPages.length - 1} aria-label="Next page">→</button>
+      </div>
 
       <footer className="footer">
         <div>
