@@ -699,6 +699,14 @@ function App() {
                 >
                   Let’s connect
                 </a>
+
+                <a
+                  href="/Mubarak-Raji-CV.pdf"
+                  className="secondary-button"
+                  download="Mubarak-Raji-CV.pdf"
+                >
+                  Download CV
+                </a>
               </motion.div>
             </motion.div>
           </div>
