@@ -2150,3 +2150,56 @@ button {
   .hero-visual { min-height: 320px; }
   .photo-stage { width: min(100%, 270px); }
 }
+
+
+/* Refined portrait sizing and a quiet, ambient blue glow. */
+.photo-stage {
+  width: min(100%, 460px) !important;
+}
+
+.photo-stage::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 8% 4%;
+  border-radius: 42px;
+  background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.28), rgba(34, 211, 238, 0.08) 48%, transparent 72%);
+  filter: blur(26px);
+  opacity: 0.5;
+  animation: portraitGlow 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.photo-frame {
+  border-radius: 24px;
+  box-shadow: 0 28px 64px var(--shadow-heavy);
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.photo-stage:hover .photo-frame {
+  border-color: rgba(96, 165, 250, 0.34);
+  box-shadow: 0 32px 72px var(--shadow-heavy);
+}
+
+@keyframes portraitGlow {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.78; }
+}
+
+@media (max-width: 1100px) {
+  .photo-stage { width: min(100%, 410px) !important; }
+}
+
+@media (max-width: 800px) {
+  .hero-visual { min-height: 430px; }
+  .photo-stage { width: min(100%, 370px) !important; }
+}
+
+@media (max-width: 480px) {
+  .hero-visual { min-height: 365px; }
+  .photo-stage { width: min(100%, 320px) !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-stage::before { animation: none; }
+}
