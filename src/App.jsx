@@ -70,19 +70,15 @@ const projects = [
     link: "https://dr-sahid-abdullah-busari.vercel.app/",
     accent: "orange",
   },
-  {
-    number: "06",
-    type: "SYSTEM ADMINISTRATION / SECURITY",
-    title: "Aetheris Analytics — Hardened Linux Server",
-    description:
-      "An academic Linux infrastructure project focused on AlmaLinux hardening, secure SSH access, SELinux, firewall policy, Apache HTTPS, Samba sharing and security auditing.",
-    stack: ["AlmaLinux 9.8", "Linux", "SELinux", "SSH", "Apache", "Samba", "Lynis"],
-    link: "https://github.com/Mubbyraj/aetheris-analytics-linux-server",
-    accent: "blue",
-  },
 ];
 
 const academicProjects = [
+  {
+    title: "Aetheris Analytics — Hardened Linux Server",
+    description:
+      "Linux server administration and security coursework covering AlmaLinux 9.8, secure SSH, SELinux, firewalld, Apache HTTPS, Samba file sharing, POSIX ACLs and Lynis security auditing.",
+    link: "https://github.com/Mubbyraj/aetheris-analytics-linux-server",
+  },
   {
     title: "GameForge Servers",
     description:
@@ -955,7 +951,7 @@ function App() {
             <div className="section-heading compact">
               <div>
                 <span className="section-index">
-                  ACADEMIC PROJECTS / 02
+                  SCHOOL WORKS / 02
                 </span>
 
                 <h2>Learning by building.</h2>
