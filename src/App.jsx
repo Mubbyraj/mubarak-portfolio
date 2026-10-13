@@ -448,7 +448,8 @@ function App() {
   const [bookOpen, setBookOpen] = useState(false);
   const [activePage, setActivePage] = useState(0);
   const bookPages = [
-    { selector: "#top", label: "Cover" },
+    { selector: "#top", label: "Introduction" },
+    { selector: ".intro-strip", label: "Opening note" },
     { selector: "#work", label: "Selected work" },
     { selector: ".academic-section", label: "Academic projects" },
     { selector: "#about", label: "About me" },
@@ -479,7 +480,10 @@ function App() {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (visible) {
           const index = chapters.indexOf(visible.target);
-          if (index >= 0) setActivePage(Math.min(index, bookPages.length - 1));
+          if (index >= 0) {
+            chapters.forEach((chapter) => chapter.classList.toggle("book-page-active", chapter === visible.target));
+            setActivePage(Math.min(index, bookPages.length - 1));
+          }
         }
       },
       { rootMargin: "-28% 0px -48% 0px", threshold: [0, 0.1, 0.25, 0.5] }
