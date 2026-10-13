@@ -69,6 +69,17 @@ const projects = [
     stack: ["Next.js", "Supabase", "Prisma", "SEO"],
     link: "https://dr-sahid-abdullah-busari.vercel.app/",
     accent: "orange",
+  },,
+
+  {
+    number: "06",
+    type: "SYSTEM ADMINISTRATION / SECURITY",
+    title: "Aetheris Analytics — Hardened Linux Server",
+    description:
+      "An academic Linux infrastructure project focused on AlmaLinux hardening, secure SSH access, SELinux, firewall policy, Apache HTTPS, Samba sharing and security auditing.",
+    stack: ["AlmaLinux 9.8", "Linux", "SELinux", "SSH", "Apache", "Samba", "Lynis"],
+    link: "https://github.com/Mubbyraj/aetheris-analytics-linux-server",
+    accent: "blue",
   },
 ];
 
