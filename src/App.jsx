@@ -605,6 +605,7 @@ function App() {
           <a href="#work">Work</a>
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
+          <a href="#certifications">Learning</a>
           <a href="#contact">Contact</a>
 
           <button
@@ -1214,6 +1215,50 @@ function App() {
         </section>
 
         <section
+          className="section certifications-section"
+          id="certifications"
+        >
+          <SectionReveal>
+            <div className="section-heading">
+              <div>
+                <span className="section-index">
+                  CERTIFICATIONS & LEARNING / 07
+                </span>
+
+                <h2>Learning in progress.</h2>
+              </div>
+
+              <p>
+                Formal learning and structured training that support my
+                development in AI and cybersecurity.
+              </p>
+            </div>
+          </SectionReveal>
+
+          <div className="certification-list">
+            <article className="certification-item">
+              <div className="certification-status completed">
+                Completed
+              </div>
+              <div>
+                <h3>Claude 101</h3>
+                <p>Anthropic · AI fundamentals</p>
+              </div>
+            </article>
+
+            <article className="certification-item">
+              <div className="certification-status in-progress">
+                In progress
+              </div>
+              <div>
+                <h3>Cybersecurity Theory & Practice</h3>
+                <p>Cisco · Cybersecurity learning path</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section
           className="contact-section"
           id="contact"
         >
@@ -1237,7 +1282,7 @@ function App() {
             }}
           >
             <span className="section-index">
-              CONTACT / 07
+              CONTACT / 08
             </span>
 
             <h2>
@@ -1298,14 +1343,6 @@ function App() {
           <span>
             © {new Date().getFullYear()}
           </span>
-
-          <button
-            type="button"
-            className="footer-top-button"
-            onClick={scrollToTop}
-          >
-            Back to top ↑
-          </button>
         </div>
       </footer>
 
